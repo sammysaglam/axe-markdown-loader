@@ -1,0 +1,451 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`markdown loader component builder correctly build component based on JSX source 1`] = `
+"import React from 'react';
+import ReactDOM from 'react-dom';
+
+import 'prismjs';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-scss';
+
+import {Compo , Apple , Pear} from '../src/PathToComponent';
+import DefaultComponent from 'module-name';
+const importedComponents = {
+	...({Compo , Apple , Pear}) ,
+	DefaultComponent ,
+};const MarkdownComponent = (props) => (
+	<div className=\\"axe-markdown\\">
+		<h1>Hello</h1>
+
+		<div
+			className={[
+				\\"axe-markdown__render\\",
+				\\"axe-markdown__render--lang-jsx\\",
+				\\"axe-markdown__render--with-source\\"
+				
+			].filter(className => className).join(' ')}
+		>
+			<div className=\\"axe-markdown__render-result\\"> <DefaultComponent
+   name=\\"Sammy\\"
+   lastName=\\"Saglam\\"
+/>
+ </div>
+			
+			
+					<pre
+						className={[
+							\\"axe-markdown__render-source\\",
+							\\"axe-markdown__render-source--with-line-numbers\\"
+							
+						].filter(className => className).join(' ')}
+					>
+						<code
+							dangerouslySetInnerHTML={{__html:Prism.highlight(
+								\`<DefaultComponent
+   name=\\"Sammy\\"
+   lastName=\\"Saglam\\"
+/>
+\` ,
+								Prism.languages.jsx
+							)}}
+						/>
+					</pre>
+				
+		</div>
+	
+	</div>
+);
+
+export default MarkdownComponent;
+
+class HtmlStyleTag extends React.Component {
+	render() {
+
+		const {content} = this.props;
+
+		return ReactDOM.createPortal(
+			<style dangerouslySetInnerHTML={{__html:content}}/> ,
+			document.head
+		);
+	}
+}
+
+"
+`;
+
+exports[`markdown loader markdown parser correctly parses CSS and shows source 1`] = `
+Object {
+  "attributes": Object {
+    "imports": Object {
+      "DefaultComponent": "module-name",
+      "{Compo , Apple , Pear}": "../src/PathToComponent",
+    },
+  },
+  "jsx": "<h1>Hello</h1>
+
+		<div
+			className={[
+				\\"axe-markdown__render\\",
+				\\"axe-markdown__render--lang-css\\",
+				\\"axe-markdown__render--with-source\\"
+				
+			].filter(className => className).join(' ')}
+		>
+			<HtmlStyleTag content={\`
+body {
+   background: red;
+}
+
+div .test > #incredible::before {
+   content: 'cool';
+   color: blue;
+}
+\`} />
+			
+			
+					<pre
+						className={[
+							\\"axe-markdown__render-source\\",
+							\\"axe-markdown__render-source--with-line-numbers\\"
+							
+						].filter(className => className).join(' ')}
+					>
+						<code
+							dangerouslySetInnerHTML={{__html:Prism.highlight(
+								\`
+body {
+   background: red;
+}
+
+div .test > #incredible::before {
+   content: 'cool';
+   color: blue;
+}
+\` ,
+								Prism.languages.css
+							)}}
+						/>
+					</pre>
+				
+		</div>
+	",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses JSX 1`] = `
+Object {
+  "attributes": Object {
+    "imports": Object {
+      "DefaultComponent": "module-name",
+      "{Compo , Apple , Pear}": "../src/PathToComponent",
+    },
+  },
+  "jsx": "<h1>Hello</h1>
+
+		<div
+			className={[
+				\\"axe-markdown__render\\",
+				\\"axe-markdown__render--lang-jsx\\",
+				null
+				
+			].filter(className => className).join(' ')}
+		>
+			<div className=\\"axe-markdown__render-result\\"> <DefaultComponent
+   name=\\"Sammy\\"
+   lastName=\\"Saglam\\"
+/>
+ </div>
+			
+			
+		</div>
+	",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses JSX and shows source 1`] = `
+Object {
+  "attributes": Object {
+    "imports": Object {
+      "DefaultComponent": "module-name",
+      "{Compo , Apple , Pear}": "../src/PathToComponent",
+    },
+  },
+  "jsx": "<h1>Hello</h1>
+
+		<div
+			className={[
+				\\"axe-markdown__render\\",
+				\\"axe-markdown__render--lang-jsx\\",
+				\\"axe-markdown__render--with-source\\"
+				
+			].filter(className => className).join(' ')}
+		>
+			<div className=\\"axe-markdown__render-result\\"> <DefaultComponent
+   name=\\"Sammy\\"
+   lastName=\\"Saglam\\"
+/>
+ </div>
+			
+			
+					<pre
+						className={[
+							\\"axe-markdown__render-source\\",
+							\\"axe-markdown__render-source--with-line-numbers\\"
+							
+						].filter(className => className).join(' ')}
+					>
+						<code
+							dangerouslySetInnerHTML={{__html:Prism.highlight(
+								\`<DefaultComponent
+   name=\\"Sammy\\"
+   lastName=\\"Saglam\\"
+/>
+\` ,
+								Prism.languages.jsx
+							)}}
+						/>
+					</pre>
+				
+		</div>
+	",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses SCSS (SASS) and shows source 1`] = `
+Object {
+  "attributes": Object {
+    "imports": Object {
+      "DefaultComponent": "module-name",
+      "{Compo , Apple , Pear}": "../src/PathToComponent",
+    },
+  },
+  "jsx": "<h1>Hello</h1>
+
+		<div
+			className={[
+				\\"axe-markdown__render\\",
+				\\"axe-markdown__render--lang-scss\\",
+				\\"axe-markdown__render--with-source\\"
+				
+			].filter(className => className).join(' ')}
+		>
+			<HtmlStyleTag content={\`body {
+  background: red; }
+  body div .test > #incredible::before {
+    content: 'cool';
+    color: #FFF; }
+\`} />
+			
+			
+					<pre
+						className={[
+							\\"axe-markdown__render-source\\",
+							\\"axe-markdown__render-source--with-line-numbers\\"
+							
+						].filter(className => className).join(' ')}
+					>
+						<code
+							dangerouslySetInnerHTML={{__html:Prism.highlight(
+								\`
+body {
+   background: red;
+   
+   $variable: #FFF;
+   
+   div .test > #incredible::before {
+      content: 'cool';
+      color: $variable;
+   }
+}
+
+\` ,
+								Prism.languages.scss
+							)}}
+						/>
+					</pre>
+				
+		</div>
+	",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses additional attributes 1`] = `
+Object {
+  "attributes": Object {
+    "attribute-with-dashes": "value",
+    "imports": Object {
+      "DefaultComponent": "module-name",
+      "{Compo , Apple , Pear}": "../src/PathToComponent",
+    },
+    "moreAttributes": Object {
+      "cool": "test",
+      "wow": "man",
+    },
+    "nestedAttributes": Object {
+      "cool": Object {
+        "test": "i am nested",
+      },
+      "wow": Object {
+        "deep nested": Object {
+          "i am": "seriously nested",
+        },
+      },
+    },
+    "watsup": "man!",
+  },
+  "jsx": "<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses empty body with just imports & attributes 1`] = `
+Object {
+  "attributes": Object {
+    "attribute-with-dashes": "value",
+    "imports": Object {
+      "DefaultComponent": "module-name",
+      "{Compo , Apple , Pear}": "../src/PathToComponent",
+    },
+    "moreAttributes": Object {
+      "cool": "test",
+      "wow": "man",
+    },
+    "nestedAttributes": Object {
+      "cool": Object {
+        "test": "i am nested",
+      },
+      "wow": Object {
+        "deep nested": Object {
+          "i am": "seriously nested",
+        },
+      },
+    },
+    "watsup": "man!",
+  },
+  "jsx": "",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses js imports 1`] = `
+Object {
+  "attributes": Object {
+    "imports": Object {
+      "DefaultComponent": "module-name",
+      "{Compo , Apple , Pear}": "../src/PathToComponent",
+    },
+  },
+  "jsx": "<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses markdown and inner fence blocks + shows source 1`] = `
+Object {
+  "attributes": Object {},
+  "jsx": "<h1>Writing markdown fence blocks</h1>
+
+		<div
+			className={[
+				\\"axe-markdown__render\\",
+				\\"axe-markdown__render--lang-markdown\\",
+				\\"axe-markdown__render--with-source\\"
+				
+			].filter(className => className).join(' ')}
+		>
+			<div className=\\"axe-markdown__render-result\\" dangerouslySetInnerHTML={{__html:md.render(\`# Title
+
+## The subtitle
+
+\\\\\`\\\\\`\\\\\`css
+body {
+    background:red;
+}
+\\\\\`\\\\\`\\\\\`
+\`)}} />
+			
+			
+					<pre
+						className={[
+							\\"axe-markdown__render-source\\",
+							\\"axe-markdown__render-source--with-line-numbers\\"
+							
+						].filter(className => className).join(' ')}
+					>
+						<code
+							dangerouslySetInnerHTML={{__html:Prism.highlight(
+								\`# Title
+
+## The subtitle
+
+\\\\\`\\\\\`\\\\\`css
+body {
+    background:red;
+}
+\\\\\`\\\\\`\\\\\`
+\` ,
+								Prism.languages.markdown
+							)}}
+						/>
+					</pre>
+				
+		</div>
+	",
+}
+`;
+
+exports[`markdown loader markdown parser correctly parses simple markdown 1`] = `
+Object {
+  "attributes": Object {},
+  "jsx": "<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+<p>Emphasis, aka italics, with <em>asterisks</em> or <em>underscores</em>.</p>
+<p>Strong emphasis, aka bold, with <strong>asterisks</strong> or <strong>underscores</strong>.</p>
+<p>Combined emphasis with <strong>asterisks and <em>underscores</em></strong>.</p>
+<p>Strikethrough uses two tildes. <del>Scratch this.</del></p>
+<ol>
+<li>First ordered list item</li>
+<li>Another item
+⋅⋅* Unordered sub-list.</li>
+<li>Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list</li>
+<li>And another item.</li>
+</ol>
+<p>⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).</p>
+<p>⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)</p>
+<ul>
+<li>Unordered list can use asterisks</li>
+</ul>
+<ul>
+<li>Or minuses</li>
+</ul>
+<ul>
+<li>Or pluses</li>
+</ul>
+<p><a href=\\"https://www.google.com\\">I'm an inline-style link</a></p>
+<p><a href=\\"https://www.google.com\\" title=\\"Google's Homepage\\">I'm an inline-style link with title</a></p>
+<p><a href=\\"https://www.mozilla.org\\">I'm a reference-style link</a></p>
+<p><a href=\\"../blob/master/LICENSE\\">I'm a relative reference to a repository file</a></p>
+<p><a href=\\"http://slashdot.org\\">You can use numbers for reference-style link definitions</a></p>
+<p>Or leave it empty and use the <a href=\\"http://www.reddit.com\\">link text itself</a>.</p>
+<p>URLs and URLs in angle brackets will automatically get turned into links.
+http://www.example.com or <a href=\\"http://www.example.com\\">http://www.example.com</a> and sometimes
+example.com (but not on Github, for example).</p>
+<p>Some text to show that the reference links can follow later.</p>
+<p>Here's our logo (hover to see the title text):</p>
+<p>Inline-style:
+<img src=\\"https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png\\" alt=\\"alt text\\" title=\\"Logo Title Text 1\\" /></p>
+<p>Reference-style:
+<img src=\\"https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png\\" alt=\\"alt text\\" title=\\"Logo Title Text 2\\" /></p>
+<p>Inline <code>code</code> has <code>back-ticks around</code> it.</p>
+",
+}
+`;

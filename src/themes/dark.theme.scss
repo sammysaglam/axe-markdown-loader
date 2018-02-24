@@ -1,0 +1,203 @@
+.axe-markdown {
+	$axe-markdown : &;
+	font-family : "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding     : 1rem;
+
+	> h1 {
+		margin     : {
+			top    : 0;
+			bottom : 3rem;
+		}
+		font-size : 3rem;
+	}
+
+	> h2 {
+		margin     : {
+			top    : 3rem;
+			bottom : 1rem;
+		}
+		border-left : 5px solid #FFA38C;
+		padding    : {
+			left   : 0.75rem;
+			bottom : 0.5rem;
+			top    : 0.5rem;
+		}
+		font-size   : 2.25rem;
+	}
+
+	> h3 {
+		margin     : {
+			top    : 2rem;
+			bottom : 1rem;
+		}
+		font-size : 1.7125rem;
+	}
+
+	> h4 {
+		margin     : {
+			top    : 2rem;
+			bottom : 1rem;
+		}
+		font-size  : 1.5rem;
+		font-style : italic;
+	}
+
+	> h5 {
+		margin     : {
+			top    : 1.5rem;
+			bottom : 1rem;
+		}
+		font-size   : 1.375rem;
+		font-style  : italic;
+		font-weight : 400;
+	}
+
+	&__render {
+
+		&--with-source {
+			border        : solid 1px #FFA38C;
+			border-radius : 3px;
+			box-shadow    : 1px 1px 15px rgba(0, 0, 0, 0.25);
+			margin-bottom : 1rem;
+		}
+	}
+
+	&__render-result {
+
+		@at-root {
+			#{$axe-markdown} .axe-markdown__render--with-source .axe-markdown__render-result {
+				padding : 1rem;
+			}
+		}
+	}
+
+	&__render-source {
+		background  : #151515;
+		padding     : 1rem;
+		white-space : pre-wrap;
+		margin      : 0;
+		line-height : 1.4;
+		position    : relative;
+
+		@at-root {
+			#{$axe-markdown} .axe-markdown__render-result + .axe-markdown__render-source {
+				border-top : 1px #FFA38C solid;
+			}
+		}
+
+		// code highlighting
+		color       : #FFFFFF;
+		.token {
+
+			&.selector {
+				color : #66CCCC;
+			}
+
+			&.punctuation {
+				color : #FFA38C;
+			}
+
+			&.property {
+				color : #FFAF60;
+			}
+
+			&.comment {
+				color : #9A9A9A;
+			}
+
+			&.attr-name {
+				color : #00EE3A;
+			}
+
+			&.attr-value {
+				color : #9A9A9A;
+			}
+
+			&.tag {
+				color : #4EB4FF;
+			}
+
+			&.string {
+				color : #CCCCCC;
+			}
+
+			&.operator {
+				color : #DA0000;
+			}
+
+			&.keyword {
+				color       : #6DFF81;
+				font-weight : bold;
+			}
+
+			&.class-name {
+				color : #FC8DFF;
+			}
+
+			&.function {
+				color : #4EB4FF;
+			}
+
+			&.delimiter {
+				color : #FF0000;
+			}
+
+			&.variable {
+				color : #DA698F;
+			}
+
+			&.number {
+				color       : #A859FF;
+				font-weight : bold;
+			}
+
+			&.package {
+				color : #DA71B9;
+			}
+
+			&.title {
+				color : #8EB8DA;
+			}
+		}
+	}
+
+	.axe-markdown__render-source--with-line-numbers {
+		position      : relative;
+		padding-left  : 3.8em;
+		counter-reset : linenumber;
+
+		> code {
+			white-space : inherit;
+		}
+
+		.line-numbers-rows {
+			position            : absolute;
+			pointer-events      : none;
+			top                 : 1rem;
+			font-size           : 100%;
+			left                : 0;
+			width               : 3em; /* works for line-numbers below 1000 lines */
+			letter-spacing      : -1px;
+			border-right        : 1px solid #999999;
+
+			-webkit-user-select : none;
+			-moz-user-select    : none;
+			-ms-user-select     : none;
+			user-select         : none;
+
+			> span {
+				pointer-events    : none;
+				display           : block;
+				counter-increment : linenumber;
+
+				&::before {
+					content       : counter(linenumber);
+					color         : #999999;
+					display       : block;
+					padding-right : 0.8em;
+					text-align    : right;
+				}
+			}
+		}
+	}
+}
