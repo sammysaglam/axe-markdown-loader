@@ -8,15 +8,114 @@ import 'prismjs';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-scss';
+import 'prismjs/components/prism-php';
+import 'prismjs/components/prism-markdown';
+
+const Remarkable = require('remarkable');
+const md = new Remarkable({ xhtmlOut: true });
+
+const highlightFenceBlock = (tokens, idx) => {
+
+	const options = tokens[idx].params.split(/\\\\s+/g);
+	const language = options[0];
+
+	const { content } = tokens[idx];
+
+	const prismLanguagesConverter = {
+		js: 'javascript'
+	};
+
+	return \`<pre class=\\"language-\${language}\\"><code>\${Prism.highlight(content, Prism.languages[language])}</code></pre>\`;
+
+};
+
+md.renderer.rules.fence_custom.bash = highlightFenceBlock;
+md.renderer.rules.fence_custom.json = highlightFenceBlock;
+md.renderer.rules.fence_custom.html = highlightFenceBlock;
+md.renderer.rules.fence_custom.jsx = highlightFenceBlock;
+md.renderer.rules.fence_custom.javascript = highlightFenceBlock;
+md.renderer.rules.fence_custom.js = highlightFenceBlock;
+md.renderer.rules.fence_custom.css = highlightFenceBlock;
+md.renderer.rules.fence_custom.scss = highlightFenceBlock;
 
 import {Compo , Apple , Pear} from '../src/PathToComponent';
 import DefaultComponent from 'module-name';
 const importedComponents = {
 	...({Compo , Apple , Pear}) ,
 	DefaultComponent ,
-};const MarkdownComponent = (props) => (
-	<div className=\\"axe-markdown\\">
-		<h1>Hello</h1>
+};export default class MarkdownComponent extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.addLineNumbers = this.addLineNumbers.bind(this);
+	}
+
+	componentDidMount() {
+		window.addEventListener('resize', this.addLineNumbers);
+		this.addLineNumbers();
+	}
+
+	componentWillUnmout() {
+		window.removeEventListener('resize', this.addLineNumbers);
+	}
+
+	componentDidUpdate() {
+		this.addLineNumbers();
+	}
+
+	addLineNumbers() {
+
+		setTimeout(() => {
+
+			const NEW_LINE_EXP = /\\\\n(?!$)/g;
+
+			const elements = [...this.rootElement.querySelectorAll('.axe-markdown__render-source--with-line-numbers')];
+
+			elements.forEach(element => {
+
+				const lines = element.textContent.split(NEW_LINE_EXP);
+				const lineCount = (lines.length + 1) || 0;
+
+				const newLineNumbersWrapper = document.createElement('span');
+				newLineNumbersWrapper.setAttribute('aria-hidden', 'true');
+				newLineNumbersWrapper.className = 'line-numbers-rows';
+				newLineNumbersWrapper.innerHTML = new Array(lineCount).join('<span></span>');
+
+				if (element.querySelectorAll('.line-numbers-rows').length === 0) {
+					element.getElementsByTagName('code')[0].appendChild(newLineNumbersWrapper);
+				}
+
+				const lineNumbersWrapper = element.querySelector('.line-numbers-rows');
+
+				if (element.querySelectorAll('.line-numbers-sizer').length === 0) {
+					const newLineNumberSizer = document.createElement('span');
+					newLineNumberSizer.className = 'line-numbers-sizer';
+					element.getElementsByTagName('code')[0].appendChild(newLineNumberSizer);
+				}
+
+				const lineNumberSizer = element.querySelector('.line-numbers-sizer');
+				lineNumberSizer.style.display = 'block';
+
+				lines.forEach((line, lineNumber) => {
+
+					lineNumberSizer.textContent = line || '\\\\n';
+					const lineSize = lineNumberSizer.getBoundingClientRect().height;
+
+					lineNumbersWrapper.children[lineNumber].style.height = lineSize + 'px';
+				});
+
+				lineNumberSizer.textContent = '';
+				lineNumberSizer.style.display = 'none';
+			});
+		});
+	}
+
+	render() {
+		const props = this.props;
+
+		return (
+			<div className=\\"axe-markdown\\" ref={rootElement => this.rootElement = rootElement}>
+				<h1>Hello</h1>
 
 		<div
 			className={[
@@ -54,10 +153,10 @@ const importedComponents = {
 				
 		</div>
 	
-	</div>
-);
-
-export default MarkdownComponent;
+			</div>
+		);
+	}
+}
 
 class HtmlStyleTag extends React.Component {
 	render() {
