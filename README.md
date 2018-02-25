@@ -105,7 +105,7 @@ or use light theme:
 ```                                                       .
 ```
 ### Screenshot:
-![Basic Example](/README/basic-example.png?raw=true "Basic Example")
+![Basic Example](/SCREENSHOTS/basic-example.png?raw=true "Basic Example")
 
 
 
@@ -120,7 +120,7 @@ Add "show-source" next to fence block language name:
 ```                                                       .
 ```
 ### Screenshot:
-![Show Source](/README/show-source.png?raw=true "Show Source")
+![Show Source](/SCREENSHOTS/show-source.png?raw=true "Show Source")
 
 
 
@@ -140,7 +140,7 @@ imports:
 ```                                                       .
 ```
 ### Screenshot:
-![Importing](/README/imports.png?raw=true "Importing")
+![Importing](/SCREENSHOTS/imports.png?raw=true "Importing")
 
 
 
@@ -161,7 +161,7 @@ imports:
 ```                                                       .
 ```
 ### Screenshot:
-![No Render](/README/no-render.png?raw=true "No Render")
+![No Render](/SCREENSHOTS/no-render.png?raw=true "No Render")
 
 
 
@@ -177,7 +177,7 @@ body {
 ```                                                       .
 ```
 ### Screenshot:
-![Paint it Red](/README/paint-it-red.png?raw=true "Paint it Red")
+![Paint it Red](/SCREENSHOTS/paint-it-red.png?raw=true "Paint it Red")
 
 
 
@@ -199,7 +199,7 @@ body {
 ```                                                       .
 ```
 ### Screenshot:
-![Use SCSS](/README/using-scss.png?raw=true "Use SCSS")
+![Use SCSS](/SCREENSHOTS/using-scss.png?raw=true "Use SCSS")
 
 
 
@@ -214,7 +214,7 @@ body {
 ```                                                       .
 ```
 ### Screenshot:
-![Don't Apply CSS](/README/dont-apply-scss.png?raw=true "Don't Apply CSS")
+![Don't Apply CSS](/SCREENSHOTS/dont-apply-scss.png?raw=true "Don't Apply CSS")
 
 
 
@@ -250,7 +250,7 @@ body {
 ```                                                       .
 ```
 ### Screenshot:
-![Fence Blocks in Markdown](/README/markdown-fence-blocks.png?raw=true "Fence Blocks in Markdown")
+![Fence Blocks in Markdown](/SCREENSHOTS/markdown-fence-blocks.png?raw=true "Fence Blocks in Markdown")
 
 
 
