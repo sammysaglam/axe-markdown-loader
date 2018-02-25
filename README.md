@@ -6,23 +6,35 @@ import SomeMarkdownFile from "./SomeMarkdownFile.md";
 ```
 
 ```jsx
-<SomeMarkdownFile/>
+<SomeMarkdownFile
+    exampleProp="hello"
+    anotherProps={() => {
+        console.log('world')}
+    }
+/>
 ```
 
 > Requirements:
 > - Webpack
 > - React 16.2.0 or greater
 
-## Features
-
-- Import markdown using ES6 import statements.
-- Render React components with JSX fence blocks in your markdown.
-    - Optional: show React component's JSX source below render.
-- Apply CSS + SCSS to page directly from within your Markdown files using fence block.
-- Import other React components, or even any other modules into your markdown files.
-- Display line numbers in source code.
-
 ## Basic Usage Example
+
+### Screenshot:
+![Basic Usage Example](/SCREENSHOTS/show-source.png?raw=true "Basic Usage Example")
+
+
+### Source:
+"SomeMarkdownFile.md" :
+```md
+# A title
+
+```jsx show-source
+<div>Hello</div>
+```                                                       .
+```
+
+"App.js" :
 ```javascript
 import SomeMarkdownFile from "./SomeMarkdownFile.md";
 
@@ -40,6 +52,19 @@ const YourReactComponent = () => (
 
 export default YourReactComponent;
 ```
+
+
+
+## Features
+
+- Import markdown using ES6 import statements.
+- Render React components with JSX fence blocks in your markdown.
+    - Optional: show React component's JSX source below render.
+- Apply CSS + SCSS to page directly from within your Markdown files using fence block.
+- Import other React components, or even any other modules into your markdown files.
+- Display line numbers in source code.
+
+
 
 ## Installation
 
