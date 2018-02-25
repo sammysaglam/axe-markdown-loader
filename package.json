@@ -1,10 +1,15 @@
 {
 	"name": "axe-markdown-loader",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "allows you to import md files as React components and easy creation of documentation",
 	"main": "index.js",
-	"author": "Sammy Saglam",
+	"author": "Sammy Saglam <sami@saglam.tk>",
 	"license": "MIT",
+	"homepage": "https://github.com/sammysaglam/axe-markdown-loader",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sammysaglam/axe-markdown-loader"
+	},
 	"scripts": {
 		"build": "webpack",
 		"watch": "webpack --progress --watch",
