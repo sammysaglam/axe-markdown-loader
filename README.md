@@ -1,9 +1,13 @@
 # axe-markdown-loader
 Allows you to import .md files directly into React.
 
-Mainly targetted for easier generation of component
-documentation, but can also be used simply to import
-Markdown files.
+```javascript
+import SomeMarkdownFile from "./SomeMarkdownFile.md";
+```
+
+```jsx
+<SomeMarkdownFile/>
+```
 
 > Requirements:
 > - Webpack
@@ -11,14 +15,15 @@ Markdown files.
 
 ## Features
 
-- Import markdown using ES6 import statements
-- Render React components in your markdown
-    - Optional: show React component's javascript source below render
+- Import markdown using ES6 import statements.
+- Render React components with JSX fence blocks in your markdown.
+    - Optional: show React component's JSX source below render.
 - Apply CSS + SCSS to page directly from within your Markdown files using fence block.
 - Import other React components, or even any other modules into your markdown files.
+- Display line numbers in source code.
 
 ## Basic Usage Example
-```jsx
+```javascript
 import SomeMarkdownFile from "./SomeMarkdownFile.md";
 
 const YourReactComponent = () => (
@@ -51,7 +56,7 @@ yarn add axe-markdown-loader --dev
 
 
 ### Step 2: add to webpack config
-And add it to your webpack module/rules configuration:
+Add to your webpack module/rules configuration:
 ```javascript
 {
 	test: /\.md/ ,
