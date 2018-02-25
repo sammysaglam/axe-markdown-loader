@@ -1,6 +1,6 @@
 {
 	"name": "axe-markdown-loader",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "allows you to import md files as React components and easy creation of documentation",
 	"main": "index.js",
 	"author": "Sammy Saglam",
@@ -10,7 +10,8 @@
 		"watch": "webpack --progress --watch",
 		"test": "jest",
 		"test:watch": "jest --watchAll",
-		"test:coverage": "jest --coverage"
+		"test:coverage": "jest --coverage",
+		"postinstall": "rm -rf node_modules/axe-markdown-loader && ln -s \"$(pwd)\" node_modules/axe-markdown-loader"
 	},
 	"dependencies": {
 		"front-matter": "^2.3.0",
@@ -26,8 +27,14 @@
 		"babel-plugin-static-fs": "^1.1.0",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-preset-env": "^1.6.1",
+		"babel-preset-react": "^6.24.1",
+		"css-loader": "^0.28.10",
+		"extract-text-webpack-plugin": "^3.0.2",
 		"jest": "^22.1.4",
 		"jest-cli": "^22.1.4",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"sass-loader": "^6.0.6",
 		"webpack": "^3.10.0"
 	},
 	"jest": {
