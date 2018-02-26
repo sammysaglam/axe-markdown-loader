@@ -62,11 +62,6 @@ module.exports = [
 		},
 		plugins: [
 			extractCss
-		],
-		resolve: {
-			alias: {
-				'axe-markdown-loader': path.resolve(__dirname)
-			}
-		}
+		]
 	}
 ];
