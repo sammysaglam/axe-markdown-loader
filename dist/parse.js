@@ -96,7 +96,8 @@ var renderFenceBlock = function renderFenceBlock(tokens, idx) {
 
 	// escape template quotes
 	var templateQuotesEscaped = content.replace(/`/g, '\\`');
-	var customFenceBlocksReplaced = templateQuotesEscaped.replace(/~~~/g, '\\`\\`\\`');
+	var backslashEscaped = templateQuotesEscaped.replace(/\\/g, '\\\\');
+	var customFenceBlocksReplaced = backslashEscaped.replace(/~~~/g, '\\`\\`\\`');
 
 	var renderResult = hideRender ? '' : languageName === 'jsx' && '<div className="axe-markdown__render-result"> ' + templateQuotesEscaped + ' </div>' || languageName === 'css' && '<HtmlStyleTag content={`' + content + '`} />' || languageName === 'scss' && '<HtmlStyleTag content={`' + sass.renderSync({ data: content }).css + '`} />' || languageName === 'markdown' && '<div className="axe-markdown__render-result" dangerouslySetInnerHTML={{__html:md.render(`' + customFenceBlocksReplaced + '`)}} />' || '<div className="axe-markdown__render-result" dangerouslySetInnerHTML={{__html:`' + content + '`}} />';
 

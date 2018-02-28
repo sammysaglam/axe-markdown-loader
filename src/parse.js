@@ -45,7 +45,8 @@ const renderFenceBlock = (tokens, idx) => {
 
 	// escape template quotes
 	const templateQuotesEscaped = content.replace(/`/g, '\\`');
-	const customFenceBlocksReplaced = templateQuotesEscaped.replace(/~~~/g, '\\`\\`\\`');
+	const backslashEscaped = templateQuotesEscaped.replace(/\\/g, '\\\\');
+	const customFenceBlocksReplaced = backslashEscaped.replace(/~~~/g, '\\`\\`\\`');
 
 	const renderResult = hideRender ? '' : (
 

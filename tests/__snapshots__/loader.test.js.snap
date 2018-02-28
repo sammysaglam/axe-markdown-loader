@@ -173,6 +173,54 @@ class HtmlStyleTag extends React.Component {
 "
 `;
 
+exports[`markdown loader markdown parser correctly escapes backslashes in source code render 1`] = `
+Object {
+  "attributes": Object {},
+  "jsx": "<h3>Simple ORM</h3>
+
+		<div
+			className={[
+				\\"axe-markdown__render\\",
+				\\"axe-markdown__render--lang-php\\",
+				\\"axe-markdown__render--with-source\\"
+				
+			].filter(className => className).join(' ')}
+		>
+			
+			
+			
+					<pre
+						className={[
+							\\"axe-markdown__render-source\\",
+							\\"axe-markdown__render-source--with-line-numbers\\"
+							
+						].filter(className => className).join(' ')}
+					>
+						<code
+							dangerouslySetInnerHTML={{__html:Prism.highlight(
+								\`class Sale extends \\\\\\\\Axe\\\\\\\\ORM {
+   
+  public static function allowed_fields() {
+    return array(
+      \\"deliveryStatus\\",
+      \\"date\\",
+      \\"customerId\\",
+      \\"customerAddresses\\" => Address::get_allowed_fields(),
+      \\"productsSold\\"      => Product::get_allowed_fields()
+    );
+  }
+}
+\` ,
+								Prism.languages.php
+							)}}
+						/>
+					</pre>
+				
+		</div>
+	",
+}
+`;
+
 exports[`markdown loader markdown parser correctly parses CSS and shows source 1`] = `
 Object {
   "attributes": Object {

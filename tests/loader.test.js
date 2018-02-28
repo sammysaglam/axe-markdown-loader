@@ -392,6 +392,41 @@ describe('markdown loader', () => {
 
 		});
 
+		it('correctly escapes backslashes in source code render', done => {
+
+			const markdownToTest = removeIndentationsBy4Tabs(`
+		
+				### Simple ORM
+				\`\`\`php
+				class Sale extends \\Axe\\ORM {
+				   
+				  public static function allowed_fields() {
+				    return array(
+				      "deliveryStatus",
+				      "date",
+				      "customerId",
+				      "customerAddresses" => Address::get_allowed_fields(),
+				      "productsSold"      => Product::get_allowed_fields()
+				    );
+				  }
+				}
+				\`\`\`
+				
+			`);
+
+			parse(markdownToTest).then(componentData => {
+
+				try {
+					expect(componentData).toMatchSnapshot();
+					done();
+
+				} catch (error) {
+					done(error);
+				}
+			});
+
+		});
+
 	});
 
 	describe('component builder', () => {
