@@ -1,4 +1,8 @@
 # axe-markdown-loader
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sammysaglam/axe-markdown-loader/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/axe-markdown-loader.svg?style=flat)](https://www.npmjs.com/package/axe-markdown-loader)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
 Allows you to import .md files directly into React.
 
 ```javascript
