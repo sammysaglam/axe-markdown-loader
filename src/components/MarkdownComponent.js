@@ -62,7 +62,7 @@ export default class MarkdownComponent extends React.Component {
 				lineNumberSizer.textContent = '';
 				lineNumberSizer.style.display = 'none';
 			});
-		});
+		}, 1);
 	}
 
 	render() {

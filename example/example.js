@@ -21316,7 +21316,7 @@ var MarkdownComponent = function (_React$Component) {
 					lineNumberSizer.textContent = '';
 					lineNumberSizer.style.display = 'none';
 				});
-			});
+			}, 1);
 		}
 	}, {
 		key: 'render',
