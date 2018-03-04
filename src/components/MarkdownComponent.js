@@ -22,6 +22,8 @@ export default class MarkdownComponent extends React.Component {
 
 		setTimeout(() => {
 
+			if ( !this.rootElement ) return false;
+
 			const NEW_LINE_EXP = /\n(?!$)/g;
 
 			const elements = [...this.rootElement.querySelectorAll('.axe-markdown__render-source--with-line-numbers')];

@@ -21276,6 +21276,8 @@ var MarkdownComponent = function (_React$Component) {
 
 			setTimeout(function () {
 
+				if (!_this2.rootElement) return false;
+
 				var NEW_LINE_EXP = /\n(?!$)/g;
 
 				var elements = [].concat(_toConsumableArray(_this2.rootElement.querySelectorAll('.axe-markdown__render-source--with-line-numbers')));
