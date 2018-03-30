@@ -178,9 +178,6 @@ const PropsTable = ({ component: { propTypes, defaultProps } }) => (
 					<tr key={propName}>
 						<td>
 							{propName}
-							{
-								console.log(info)
-							}
 						</td>
 						<td className=\\"axe-markdown-props-table__is-required\\">
 							{info.isRequired ? '✅' : null}
