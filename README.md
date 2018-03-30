@@ -299,5 +299,24 @@ Add "no-line-numbers" if you don't want display the line numbers in the source c
 
 
 
+## Integration with axe-prop-types
+Automatically generate PropsTable by using [axe-prop-types](https://github.com/sammysaglam/axe-prop-types).
+
+> This requires installing [axe-prop-types](https://github.com/sammysaglam/axe-prop-types#step-1-add-dependency) & configuring webpack by following instructions here: [axe-prop-types](https://github.com/sammysaglam/axe-prop-types#step-2-add-to-webpack-config)
+ 
+```md
+---                                                       .
+imports:
+    'ReactLoginPanel': 'react-login-panel'
+---                                                       .
+
+## PropTypes
+[PROPS_TABLE(ReactLoginPanel)]
+```
+### Screenshot:
+![Rendering Component Props Table](/SCREENSHOTS/axe-prop-types.png?raw=true "Rendering Component Props Table")
+
+
+
 ## License
 MIT
