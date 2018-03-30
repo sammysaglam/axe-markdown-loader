@@ -22754,8 +22754,7 @@ var PropsTable = function PropsTable(_ref) {
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'td',
 						null,
-						propName,
-						console.log(info)
+						propName
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'td',
