@@ -28,6 +28,50 @@
     font-size: 1.375rem;
     font-style: italic;
     font-weight: 400; }
+  .axe-markdown > table {
+    margin-top: 2rem;
+    font-size: 1rem;
+    border-spacing: 0;
+    border-collapse: collapse; }
+    .axe-markdown > table th {
+      background: #151515;
+      color: white; }
+    .axe-markdown > table td, .axe-markdown > table th {
+      margin: 0;
+      padding: 0.5rem;
+      border: solid 1px #DDDDDD;
+      text-align: left;
+      vertical-align: top; }
+    .axe-markdown > table tr:hover > td {
+      background: #FFEFE8; }
+  .axe-markdown .axe-markdown-props-table td {
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 0.75rem; }
+  .axe-markdown .axe-markdown-props-table__is-required {
+    text-align: center; }
+  .axe-markdown .axe-markdown-props-table__inner {
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    margin: 0.45rem 0 0.45rem 0.65rem;
+    padding: 0.3rem 0 0.3rem 0.35rem;
+    background: #FFF7FA; }
+    .axe-markdown .axe-markdown-props-table__inner-next-line {
+      padding-left: 1.25rem;
+      line-height: 1.5; }
+    .axe-markdown .axe-markdown-props-table__inner:hover {
+      background: #FFCDCF; }
+    .axe-markdown .axe-markdown-props-table__inner .axe-markdown-props-table__inner {
+      background: #EEFFE7; }
+      .axe-markdown .axe-markdown-props-table__inner .axe-markdown-props-table__inner:hover {
+        background: #FDB3FF; }
+      .axe-markdown .axe-markdown-props-table__inner .axe-markdown-props-table__inner .axe-markdown-props-table__inner {
+        background: #FFEEFB; }
+        .axe-markdown .axe-markdown-props-table__inner .axe-markdown-props-table__inner .axe-markdown-props-table__inner:hover {
+          background: #A477FF; }
+  .axe-markdown .axe-markdown-props-table__default-props {
+    white-space: pre; }
+  .axe-markdown .axe-markdown-props-table__object-shape-key {
+    font-weight: bold; }
   .axe-markdown__render--with-source {
     border: solid 1px #FFA38C;
     border-radius: 3px;
@@ -81,13 +125,13 @@
       color: #DA71B9; }
     .axe-markdown__render-source .token.title {
       color: #8EB8DA; }
-  .axe-markdown .axe-markdown__render-source--with-line-numbers {
+  .axe-markdown__render-source--with-line-numbers {
     position: relative;
     padding-left: 3.8em;
     counter-reset: linenumber; }
-    .axe-markdown .axe-markdown__render-source--with-line-numbers > code {
+    .axe-markdown__render-source--with-line-numbers > code {
       white-space: inherit; }
-    .axe-markdown .axe-markdown__render-source--with-line-numbers .line-numbers-rows {
+    .axe-markdown__render-source--with-line-numbers .line-numbers-rows {
       position: absolute;
       pointer-events: none;
       top: 1rem;
@@ -101,11 +145,11 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none; }
-      .axe-markdown .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span {
+      .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span {
         pointer-events: none;
         display: block;
         counter-increment: linenumber; }
-        .axe-markdown .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span::before {
+        .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span::before {
           content: counter(linenumber);
           color: #999999;
           display: block;

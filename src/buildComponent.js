@@ -4,7 +4,8 @@ const path = require('path');
 const reduce = require('reduce-object');
 
 const moduleImports = fs.readFileSync(path.join(__dirname, '/imports/imports.js'), 'utf8') + '\n\n';
-const Component = fs.readFileSync(path.join(__dirname, '/components/MarkdownComponent.js'), 'utf8') + '\n\n';
+const MarkdownComponent = fs.readFileSync(path.join(__dirname, '/components/MarkdownComponent.js'), 'utf8') + '\n\n';
+const PropsTableComponent = fs.readFileSync(path.join(__dirname, '/components/PropsTable.js'), 'utf8') + '\n\n';
 const HtmlStyleTag = fs.readFileSync(path.join(__dirname, '/components/HtmlStyleTag.js'), 'utf8') + '\n\n';
 
 const destructureNonDefaultImports = imports => imports.replace(/({[^}]+})/g, '...($1)');
@@ -39,7 +40,12 @@ module.exports = {
 
 			+
 
-			Component.replace(/\[__GET_MARKDOWN_JSX__]/, component.jsx)
+			MarkdownComponent.replace(/\[__GET_MARKDOWN_JSX__]/, component.jsx)
+			                 .replace(/<p>\[PROPS_TABLE\(([^)]+)\)]<\/p>/,'<PropsTable component={$1} />')
+
+			+
+
+			PropsTableComponent
 
 			+
 

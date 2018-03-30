@@ -52,6 +52,82 @@
 		font-weight : 400;
 	}
 
+	> table {
+		margin-top      : 2rem;
+		font-size       : 1rem;
+		border-spacing  : 0;
+		border-collapse : collapse;
+
+		th {
+			background : #151515;
+			color      : white;
+		}
+
+		td, th {
+			margin         : 0;
+			padding        : 0.5rem;
+			border         : solid 1px #DDDDDD;
+			text-align     : left;
+			vertical-align : top;
+		}
+
+		tr:hover > td {
+			background : #FFEFE8;
+		}
+	}
+
+	.axe-markdown-props-table {
+
+		td {
+			font-family : "Lucida Console", Monaco, monospace;
+			font-size   : 0.75rem;
+		}
+
+		&__is-required {
+			text-align : center;
+		}
+
+		&__inner {
+			font-size   : 0.6875rem;
+			line-height : 1.2;
+			margin      : 0.45rem 0 0.45rem 0.65rem;
+			padding     : 0.3rem 0 0.3rem 0.35rem;
+			background  : #FFF7FA;
+
+			&-next-line {
+				padding-left : 1.25rem;
+				line-height  : 1.5;
+			}
+
+			&:hover {
+				background : #FFCDCF;
+			}
+
+			.axe-markdown-props-table__inner {
+				background  : #EEFFE7;
+				&:hover {
+					background : #FDB3FF;
+				}
+
+				.axe-markdown-props-table__inner {
+					background  : #FFEEFB;
+					&:hover {
+						background : #A477FF;
+					}
+				}
+			}
+		}
+
+		&__default-props {
+			white-space : pre;
+		}
+
+		&__object-shape-key {
+			font-weight : bold;
+		}
+
+	}
+
 	&__render {
 
 		&--with-source {
