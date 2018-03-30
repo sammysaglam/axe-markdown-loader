@@ -22,22 +22,16 @@ import SomeMarkdownFile from "./SomeMarkdownFile.md";
 > - Webpack
 > - React 16.2.0 or greater
 
-## Basic Usage Example
+## Usage Demo Video
+The below demo video will demonstrate how to document any component; in the
+below example I used [ReactTable](https://react-table.js.org/#/story/readme)
+by **react-tools**
 
 ### Screenshot:
-![Basic Usage Example](/SCREENSHOTS/show-source.png?raw=true "Basic Usage Example")
+![Usage Example](/SCREENSHOTS/main-demo.gif?raw=true "Usage Example")
 
 
-### Source:
-"SomeMarkdownFile.md" :
-```md
-# A title
-
-```jsx show-source
-<div>Hello</div>
-```                                                       .
-```
-
+## Importing Markdown file example:
 "App.js" :
 ```javascript
 import SomeMarkdownFile from "./SomeMarkdownFile.md";
