@@ -261,7 +261,7 @@ body {
 
 
 
-## Writing Markdown fence blocks
+## fence blocks inside fence block
 When writing markdown examples, use ~~~ to open/close your fence blocks:
 ```md
 # Writing markdown fence blocks
