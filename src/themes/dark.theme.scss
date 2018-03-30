@@ -161,7 +161,7 @@
 		}
 	}
 
-	.axe-markdown__render-source--with-line-numbers {
+	&__render-source--with-line-numbers {
 		position      : relative;
 		padding-left  : 3.8em;
 		counter-reset : linenumber;
