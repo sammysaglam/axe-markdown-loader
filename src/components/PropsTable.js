@@ -26,7 +26,7 @@ const PropsTable = ({ component: { propTypes, defaultProps } }) => (
 							{JSON.stringify(defaultProps[propName], null, 2)}
 						</td>
 					</tr>
-				])
+				], [])
 			}
 		</tbody>
 	</table>
