@@ -22772,7 +22772,7 @@ var PropsTable = function PropsTable(_ref) {
 						JSON.stringify(defaultProps[propName], null, 2)
 					)
 				)]);
-			})
+			}, [])
 		)
 	);
 };
