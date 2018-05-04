@@ -6,11 +6,22 @@ imports:
 # Axe Markdown Loader Examples
 
 ## Basic Example
-
 ```jsx show-source
 <div className="the-best-class-ever">
     Hello
 </div>
+```
+
+## Variable Injection
+```jsx show-source
+<div className="the-best-class-ever-#{5*5}">
+    #{234 * 500} --> inserted using: {'  \#{234 * 500}  '}
+    {'   #{JSON.stringify({object:"prop"})}   '} --> inserted using: {'  \#{JSON.stringify({object:"prop"})}  '}
+
+    #{true ? `hello #{5 * 5}` : ""}
+</div>
+
+#{ true ? `<div>i am rendered because I have a true condition injected before me: {'  \#{true ? "...text..." : ""}  '}</div>` : '' }
 ```
 
 ## Using imports
@@ -35,6 +46,8 @@ imports:
     <button onClick={props.clickExample}>
         Click me
     </button> to see some onClick bindings!
+
+    #{5 * 500}
     
     <br /><br />
     
@@ -77,4 +90,14 @@ var test = 123;
 <div>
     Hello
 </div>
-```     
+```
+
+## Some javascript
+```js show-source
+console.log("props = " , props);
+```
+
+## Some html
+```html show-source
+<div class="it-works">it works</div>
+```

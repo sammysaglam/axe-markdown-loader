@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/axe-markdown-loader.svg?style=flat)](https://www.npmjs.com/package/axe-markdown-loader)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-Allows you to import .md files directly into React.
+Developer-friendly way to automate React component documentation (including automation of props tables & examples).
 
 ```javascript
 import SomeMarkdownFile from "./SomeMarkdownFile.md";
@@ -58,7 +58,8 @@ export default YourReactComponent;
 - Import markdown using ES6 import statements.
 - Render React components with JSX fence blocks in your markdown.
     - Optional: show React component's JSX source below render.
-- Apply CSS + SCSS to page directly from within your Markdown files using fence block.
+- Edit sources of renders on-the-fly in your browser.
+- Apply CSS to page directly from within your Markdown files using fence blocks.
 - Import other React components, or even any other modules into your markdown files.
 - Display line numbers in source code.
 
@@ -148,6 +149,23 @@ Add "show-source" next to fence block language name:
 
 
 
+## Variable Injection
+Use #{....} template blocks to inject variables
+```md
+```jsx show-source
+
+<div>#{ 500 * 500 }</div>
+
+<div className="#{props.someClassName}">hello</div>
+
+#{true ? `<div className="visible">hello #{5 * 5}</div>` : ""}
+
+```                                                       .
+```
+
+
+
+
 ## Importing modules / other React components
 ```md
 ---
@@ -205,28 +223,6 @@ body {
 
 
 
-## Using SCSS:
-Feel free to use SCSS syntax:
-```md
-# Paint it red!
-```scss show-source
-body {
-    $bg-color: red;
-
-    background: $bg-color;
-    
-    div {
-        background: $bg-color;
-    }
-}
-```                                                       .
-```
-### Screenshot:
-![Use SCSS](/SCREENSHOTS/using-scss.png?raw=true "Use SCSS")
-
-
-
-
 ## Don't apply, just show the source!
 Add "no-render" if you don't want to apply your scss styles:
 ```md
@@ -238,19 +234,6 @@ body {
 ```
 ### Screenshot:
 ![Don't Apply CSS](/SCREENSHOTS/dont-apply-scss.png?raw=true "Don't Apply CSS")
-
-
-
-
-## Use just CSS (without SCSS):
-Use a "css" fence block:
-```md
-```css show-source no-render
-body {
-    background:red;
-}
-```                                                       .
-```
 
 
 

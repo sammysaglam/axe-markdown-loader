@@ -1,24 +1,26 @@
+let markdownId = 0;
 export default class MarkdownComponent extends React.Component {
 	constructor(props) {
 		super(props);
+		this.id = markdownId++;
 
-		this.addLineNumbers = this.addLineNumbers.bind(this);
+		this.updateLineNumbers = this.updateLineNumbers.bind(this);
 	}
 
 	componentDidMount() {
-		window.addEventListener('resize', this.addLineNumbers);
-		this.addLineNumbers();
+		window.addEventListener('resize', this.updateLineNumbers);
+		this.updateLineNumbers();
 	}
 
 	componentWillUnmout() {
-		window.removeEventListener('resize', this.addLineNumbers);
+		window.removeEventListener('resize', this.updateLineNumbers);
 	}
 
 	componentDidUpdate() {
-		this.addLineNumbers();
+		this.updateLineNumbers();
 	}
 
-	addLineNumbers() {
+	updateLineNumbers() {
 
 		setTimeout(() => {
 
@@ -69,6 +71,12 @@ export default class MarkdownComponent extends React.Component {
 
 	render() {
 		const props = this.props;
+		const { id , updateLineNumbers } = this;
+
+        window.AxeMarkdownModules.props = {
+			...window.AxeMarkdownModules.props,
+			[id]: {...props}
+		};
 
 		return (
 			<div className="axe-markdown" ref={rootElement => this.rootElement = rootElement}>

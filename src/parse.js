@@ -1,21 +1,24 @@
 const frontMatter = require('front-matter');
 const Remarkable = require('remarkable');
 const md = new Remarkable({ xhtmlOut: true });
-const sass = require('node-sass');
 
 const renderFenceBlock = (tokens, idx) => {
 
 	const options = tokens[idx].params.split(/\s+/g);
 	const language = options[0];
 
-	const { content } = tokens[idx];
-
 	const languageAbbreviations = {
 		js: 'javascript',
+		css: 'scss',
 		md: 'markdown'
 	};
 
 	const languageName = languageAbbreviations[language] ? languageAbbreviations[language] : language;
+
+	const { content: sourceCode } = tokens[idx];
+	const sourceCodeWithTemplateStringInjectionEnabled = sourceCode.replace(/\$\{/g,'\\\${').replace(/([^\\]|^)\#{/g,'$1${');
+	const sourceCodeCustomFenceBlocksReplaced = languageName === "markdown" ? sourceCodeWithTemplateStringInjectionEnabled.replace(/~~~/g, '\\`\\`\\`') : sourceCodeWithTemplateStringInjectionEnabled;
+	const processedSourceCode = sourceCodeCustomFenceBlocksReplaced;
 
 	const isRenderableLanguage = (
 
@@ -36,6 +39,10 @@ const renderFenceBlock = (tokens, idx) => {
 		||
 
 		languageName === 'markdown'
+
+		||
+
+		languageName === 'javascript'
 	);
 
 	// get render settings
@@ -43,41 +50,6 @@ const renderFenceBlock = (tokens, idx) => {
 	const hideRender = options.includes('no-render') || !isRenderableLanguage;
 	const hideLineNumbers = options.includes('no-line-numbers');
 
-	// escape template quotes
-	const templateQuotesEscaped = content.replace(/`/g, '\\`');
-	const backslashEscaped = templateQuotesEscaped.replace(/\\/g, '\\\\');
-	const customFenceBlocksReplaced = backslashEscaped.replace(/~~~/g, '\\`\\`\\`');
-
-	const renderResult = hideRender ? '' : (
-
-		(languageName === 'jsx' && (
-			`<div className="axe-markdown__render-result"> ${templateQuotesEscaped} </div>`
-		))
-
-		||
-
-		(languageName === 'css' && (
-			`<HtmlStyleTag content={\`${content}\`} />`
-		))
-
-		||
-
-		(languageName === 'scss' && (
-			`<HtmlStyleTag content={\`${sass.renderSync({ data: content }).css}\`} />`
-		))
-
-		||
-
-		(languageName === 'markdown' && (
-			`<div className="axe-markdown__render-result" dangerouslySetInnerHTML={{__html:md.render(\`${customFenceBlocksReplaced}\`)}} />`
-		))
-
-		||
-
-		`<div className="axe-markdown__render-result" dangerouslySetInnerHTML={{__html:\`${content}\`}} />`
-	);
-
-	// @formatter:off
 	return `
 		<div
 			className={[
@@ -87,35 +59,17 @@ const renderFenceBlock = (tokens, idx) => {
 				
 			].filter(className => className).join(' ')}
 		>
-			${renderResult}
-			
-			${showSource ?
-
-				`
-					<pre
-						className={[
-							"axe-markdown__render-source",
-							${hideLineNumbers ? 'null' : '"axe-markdown__render-source--with-line-numbers"'}
-							
-						].filter(className => className).join(' ')}
-					>
-						<code
-							dangerouslySetInnerHTML={{__html:Prism.highlight(
-								\`${customFenceBlocksReplaced}\` ,
-								Prism.languages.${languageName}
-							)}}
-						/>
-					</pre>
-				`
-
-				:
-
-				''
-
-			}
+			<ExampleRenderer
+				initialSource={\`${processedSourceCode}\`}
+				languageName="${languageName}"
+				showSource={${showSource}}
+				parentMarkdownId={id}
+				hideLineNumbers={${hideLineNumbers}}
+				updateLineNumbers={updateLineNumbers}
+				hideRender={${hideRender}}
+			/>
 		</div>
 	`;
-	// @formatter:on
 };
 
 md.renderer.rules.fence_custom.bash = renderFenceBlock;

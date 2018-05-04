@@ -86,7 +86,16 @@
     margin: 0;
     line-height: 1.4;
     position: relative;
+    letter-spacing: -0.2px;
+    font-size: inherit;
+    caret-color: white;
     color: #FFFFFF; }
+    .axe-markdown__render-source::selection {
+      color: white;
+      background: #d4ffdd; }
+    .axe-markdown__render-source::-moz-selection {
+      color: white;
+      background: #d4ffdd; }
     .axe-markdown .axe-markdown__render-result + .axe-markdown__render-source {
       border-top: 1px #FFA38C solid; }
     .axe-markdown__render-source .token.selector {
@@ -125,33 +134,53 @@
       color: #DA71B9; }
     .axe-markdown__render-source .token.title {
       color: #8EB8DA; }
-  .axe-markdown__render-source--with-line-numbers {
-    position: relative;
-    padding-left: 3.8em;
-    counter-reset: linenumber; }
-    .axe-markdown__render-source--with-line-numbers > code {
-      white-space: inherit; }
-    .axe-markdown__render-source--with-line-numbers .line-numbers-rows {
-      position: absolute;
-      pointer-events: none;
-      top: 1rem;
-      font-size: 100%;
-      left: 0;
-      width: 3em;
-      /* works for line-numbers below 1000 lines */
-      letter-spacing: -1px;
-      border-right: 1px solid #999999;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none; }
-      .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span {
+    .axe-markdown__render-source--line-numbers-padding {
+      padding-left: 3.8em; }
+    .axe-markdown__render-source--with-line-numbers {
+      position: relative;
+      counter-reset: linenumber; }
+      .axe-markdown__render-source--with-line-numbers > code {
+        white-space: inherit; }
+      .axe-markdown__render-source--with-line-numbers .line-numbers-rows {
+        position: absolute;
         pointer-events: none;
-        display: block;
-        counter-increment: linenumber; }
-        .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span::before {
-          content: counter(linenumber);
-          color: #999999;
+        top: 1rem;
+        font-size: 100%;
+        left: 0;
+        width: 3em;
+        /* works for line-numbers below 1000 lines */
+        letter-spacing: -1px;
+        border-right: 1px solid #999999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none; }
+        .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span {
+          pointer-events: none;
           display: block;
-          padding-right: 0.8em;
-          text-align: right; }
+          counter-increment: linenumber; }
+          .axe-markdown__render-source--with-line-numbers .line-numbers-rows > span::before {
+            content: counter(linenumber);
+            color: #999999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right; }
+
+@keyframes axe-markdown-delay-appearance {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+  .axe-markdown__restore-source {
+    opacity: 0;
+    animation: axe-markdown-delay-appearance 0.3s 0.2s forwards;
+    border: solid 2px white;
+    border-radius: 3px;
+    background: #ff7070;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem; }
+    .axe-markdown__restore-source:hover {
+      background: #ff8383; }

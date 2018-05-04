@@ -1,16 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reduce from 'reduce-object';
+import { transform } from "@babel/standalone/babel.min.js";
+import stylis from "stylis";
 
-import 'prismjs';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-php';
-import 'prismjs/components/prism-markdown';
+const Prism = require('prismjs');
+const loadLanguages = require('prismjs/components/index');
+loadLanguages(['jsx','bash','scss','php','markdown']);
 
 const Remarkable = require('remarkable');
 const md = new Remarkable({ xhtmlOut: true });
+
+if ( !window.AxeMarkdownModules ) {
+	const AxeMarkdownModules = {
+		core: {
+			React,
+			ReactDOM
+		},
+		userImports: {},
+		props: {}
+	};
+	window.AxeMarkdownModules = AxeMarkdownModules;
+}
 
 const highlightFenceBlock = (tokens, idx) => {
 

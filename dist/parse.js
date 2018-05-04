@@ -70,40 +70,34 @@
 var frontMatter = __webpack_require__(1);
 var Remarkable = __webpack_require__(2);
 var md = new Remarkable({ xhtmlOut: true });
-var sass = __webpack_require__(3);
 
 var renderFenceBlock = function renderFenceBlock(tokens, idx) {
 
 	var options = tokens[idx].params.split(/\s+/g);
 	var language = options[0];
 
-	var content = tokens[idx].content;
-
-
 	var languageAbbreviations = {
 		js: 'javascript',
+		css: 'scss',
 		md: 'markdown'
 	};
 
 	var languageName = languageAbbreviations[language] ? languageAbbreviations[language] : language;
 
-	var isRenderableLanguage = languageName === 'html' || languageName === 'jsx' || languageName === 'css' || languageName === 'scss' || languageName === 'markdown';
+	var sourceCode = tokens[idx].content;
+
+	var sourceCodeWithTemplateStringInjectionEnabled = sourceCode.replace(/\$\{/g, '\\\${').replace(/([^\\]|^)\#{/g, '$1${');
+	var sourceCodeCustomFenceBlocksReplaced = languageName === "markdown" ? sourceCodeWithTemplateStringInjectionEnabled.replace(/~~~/g, '\\`\\`\\`') : sourceCodeWithTemplateStringInjectionEnabled;
+	var processedSourceCode = sourceCodeCustomFenceBlocksReplaced;
+
+	var isRenderableLanguage = languageName === 'html' || languageName === 'jsx' || languageName === 'css' || languageName === 'scss' || languageName === 'markdown' || languageName === 'javascript';
 
 	// get render settings
 	var showSource = options.includes('show-source') || !isRenderableLanguage;
 	var hideRender = options.includes('no-render') || !isRenderableLanguage;
 	var hideLineNumbers = options.includes('no-line-numbers');
 
-	// escape template quotes
-	var templateQuotesEscaped = content.replace(/`/g, '\\`');
-	var backslashEscaped = templateQuotesEscaped.replace(/\\/g, '\\\\');
-	var customFenceBlocksReplaced = backslashEscaped.replace(/~~~/g, '\\`\\`\\`');
-
-	var renderResult = hideRender ? '' : languageName === 'jsx' && '<div className="axe-markdown__render-result"> ' + templateQuotesEscaped + ' </div>' || languageName === 'css' && '<HtmlStyleTag content={`' + content + '`} />' || languageName === 'scss' && '<HtmlStyleTag content={`' + sass.renderSync({ data: content }).css + '`} />' || languageName === 'markdown' && '<div className="axe-markdown__render-result" dangerouslySetInnerHTML={{__html:md.render(`' + customFenceBlocksReplaced + '`)}} />' || '<div className="axe-markdown__render-result" dangerouslySetInnerHTML={{__html:`' + content + '`}} />';
-
-	// @formatter:off
-	return '\n\t\t<div\n\t\t\tclassName={[\n\t\t\t\t"axe-markdown__render",\n\t\t\t\t"axe-markdown__render--lang-' + languageName + '",\n\t\t\t\t' + (showSource ? '"axe-markdown__render--with-source"' : 'null') + '\n\t\t\t\t\n\t\t\t].filter(className => className).join(\' \')}\n\t\t>\n\t\t\t' + renderResult + '\n\t\t\t\n\t\t\t' + (showSource ? '\n\t\t\t\t\t<pre\n\t\t\t\t\t\tclassName={[\n\t\t\t\t\t\t\t"axe-markdown__render-source",\n\t\t\t\t\t\t\t' + (hideLineNumbers ? 'null' : '"axe-markdown__render-source--with-line-numbers"') + '\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t].filter(className => className).join(\' \')}\n\t\t\t\t\t>\n\t\t\t\t\t\t<code\n\t\t\t\t\t\t\tdangerouslySetInnerHTML={{__html:Prism.highlight(\n\t\t\t\t\t\t\t\t`' + customFenceBlocksReplaced + '` ,\n\t\t\t\t\t\t\t\tPrism.languages.' + languageName + '\n\t\t\t\t\t\t\t)}}\n\t\t\t\t\t\t/>\n\t\t\t\t\t</pre>\n\t\t\t\t' : '') + '\n\t\t</div>\n\t';
-	// @formatter:on
+	return '\n\t\t<div\n\t\t\tclassName={[\n\t\t\t\t"axe-markdown__render",\n\t\t\t\t"axe-markdown__render--lang-' + languageName + '",\n\t\t\t\t' + (showSource ? '"axe-markdown__render--with-source"' : 'null') + '\n\t\t\t\t\n\t\t\t].filter(className => className).join(\' \')}\n\t\t>\n\t\t\t<ExampleRenderer\n\t\t\t\tinitialSource={`' + processedSourceCode + '`}\n\t\t\t\tlanguageName="' + languageName + '"\n\t\t\t\tshowSource={' + showSource + '}\n\t\t\t\tparentMarkdownId={id}\n\t\t\t\thideLineNumbers={' + hideLineNumbers + '}\n\t\t\t\tupdateLineNumbers={updateLineNumbers}\n\t\t\t\thideRender={' + hideRender + '}\n\t\t\t/>\n\t\t</div>\n\t';
 };
 
 md.renderer.rules.fence_custom.bash = renderFenceBlock;
@@ -148,12 +142,6 @@ module.exports = require("front-matter");
 /***/ (function(module, exports) {
 
 module.exports = require("remarkable");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("node-sass");
 
 /***/ })
 /******/ ])));

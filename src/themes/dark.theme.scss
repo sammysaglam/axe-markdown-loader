@@ -148,12 +148,25 @@
 	}
 
 	&__render-source {
-		background  : #151515;
-		padding     : 1rem;
-		white-space : pre-wrap;
-		margin      : 0;
-		line-height : 1.4;
-		position    : relative;
+		background     : #151515;
+		padding        : 1rem;
+		white-space    : pre-wrap;
+		margin         : 0;
+		line-height    : 1.4;
+		position       : relative;
+		letter-spacing : -0.2px;
+		font-size      : inherit;
+		caret-color    : white;
+
+		&::selection {
+			color: white; 
+			background: rgb(212, 255, 221);
+		}
+
+		&::-moz-selection {
+			color: white;
+			background: rgb(212, 255, 221);
+		}
 
 		@at-root {
 			#{$axe-markdown} .axe-markdown__render-result + .axe-markdown__render-source {
@@ -235,45 +248,74 @@
 				color : #8EB8DA;
 			}
 		}
-	}
 
-	&__render-source--with-line-numbers {
-		position      : relative;
-		padding-left  : 3.8em;
-		counter-reset : linenumber;
-
-		> code {
-			white-space : inherit;
+		&--line-numbers-padding {
+			padding-left  : 3.8em;
 		}
 
-		.line-numbers-rows {
-			position            : absolute;
-			pointer-events      : none;
-			top                 : 1rem;
-			font-size           : 100%;
-			left                : 0;
-			width               : 3em; /* works for line-numbers below 1000 lines */
-			letter-spacing      : -1px;
-			border-right        : 1px solid #999999;
-
-			-webkit-user-select : none;
-			-moz-user-select    : none;
-			-ms-user-select     : none;
-			user-select         : none;
-
-			> span {
-				pointer-events    : none;
-				display           : block;
-				counter-increment : linenumber;
-
-				&::before {
-					content       : counter(linenumber);
-					color         : #999999;
-					display       : block;
-					padding-right : 0.8em;
-					text-align    : right;
+		&--with-line-numbers {
+			position      : relative;
+			counter-reset : linenumber;
+	
+			> code {
+				white-space : inherit;
+			}
+	
+			.line-numbers-rows {
+				position            : absolute;
+				pointer-events      : none;
+				top                 : 1rem;
+				font-size           : 100%;
+				left                : 0;
+				width               : 3em; /* works for line-numbers below 1000 lines */
+				letter-spacing      : -1px;
+				border-right        : 1px solid #999999;
+	
+				-webkit-user-select : none;
+				-moz-user-select    : none;
+				-ms-user-select     : none;
+				user-select         : none;
+	
+				> span {
+					pointer-events    : none;
+					display           : block;
+					counter-increment : linenumber;
+	
+					&::before {
+						content       : counter(linenumber);
+						color         : #999999;
+						display       : block;
+						padding-right : 0.8em;
+						text-align    : right;
+					}
 				}
 			}
+		}
+	}
+	
+	@keyframes axe-markdown-delay-appearance {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	&__restore-source {
+		opacity: 0;
+		animation: axe-markdown-delay-appearance 0.3s 0.2s forwards;
+		border:solid 2px white;
+		border-radius: 3px;
+		background:#ff7070;
+		color:white;
+		padding:0.25rem 0.5rem;
+		cursor: pointer;
+		font-weight: bold;
+		font-size:0.75rem;
+
+		&:hover {
+			background:#ff8383;
 		}
 	}
 }
