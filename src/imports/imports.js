@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reduce from 'reduce-object';
-import { transform } from "@babel/standalone/babel.min.js";
 import stylis from "stylis";
+
+const buble = require( 'buble');
 
 const Prism = require('prismjs');
 const loadLanguages = require('prismjs/components/index');

@@ -1,5 +1,5 @@
 const jsxTransform = ({id , parentMarkdownId , source}) => (
-    transform(`
+    buble.transform(`
         (() => {
 
             const { React , ReactDOM } = window.AxeMarkdownModules.core;
@@ -13,13 +13,11 @@ const jsxTransform = ({id , parentMarkdownId , source}) => (
             ReactDOM.render(Component, renderTarget);
 
         })();
-    `, {
-        presets: ['es2015', 'react'],
-    }).code
+    `).code
 );
 
 const javascriptTransform = ({parentMarkdownId , source}) => (
-    transform(`
+    buble.transform(`
         (() => {
 
             const { React , ReactDOM } = window.AxeMarkdownModules.core;
@@ -30,9 +28,7 @@ const javascriptTransform = ({parentMarkdownId , source}) => (
             ${source}
 
         })();
-    `, {
-        presets: ['es2015', 'react'],
-    }).code
+    `).code
 );
 
 const transpileSource = ({languageName , source, id = null , parentMarkdownId}) => (
