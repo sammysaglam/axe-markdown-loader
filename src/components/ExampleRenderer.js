@@ -192,18 +192,17 @@ class ExampleRenderer extends React.Component {
                             className={[
                                 "axe-markdown__render-source",
                                 hideLineNumbers ? null : 'axe-markdown__render-source--with-line-numbers',
-                                hideLineNumbers ? null : 'axe-markdown__render-source--line-numbers-padding'
+                                hideLineNumbers ? null : 'axe-markdown__render-source--line-numbers-padding',
                             ].filter(className => className).join(' ')}
                         >
-                            <code
-                                style={{pointerEvents:'none' , background:'none'}}
-                                dangerouslySetInnerHTML={{ __html: Prism.highlight(source, Prism.languages[languageName]) }}
-                            />
+                            <code style={{pointerEvents:'none' , background:'none'}}>
+                                {source}
+                            </code>
                         </pre>
                         <textarea
                             className={[
                                 "axe-markdown__render-source",
-                                hideLineNumbers ? null : 'axe-markdown__render-source--line-numbers-padding'
+                                hideLineNumbers ? null : 'axe-markdown__render-source--line-numbers-padding',
                             ].filter(className => className).join(' ')}
                             onChange={({ target: { value } }) => onChange({ newSource: value })}
                             value={source}

@@ -5,10 +5,6 @@ import stylis from "stylis";
 
 const buble = require( 'buble');
 
-const Prism = require('prismjs');
-const loadLanguages = require('prismjs/components/index');
-loadLanguages(['jsx','bash','scss','php','markdown']);
-
 const Remarkable = require('remarkable');
 const md = new Remarkable({ xhtmlOut: true });
 
@@ -31,11 +27,7 @@ const highlightFenceBlock = (tokens, idx) => {
 
 	const { content } = tokens[idx];
 
-	const prismLanguagesConverter = {
-		js: 'javascript'
-	};
-
-	return `<pre class="language-${language}"><code>${Prism.highlight(content, Prism.languages[language])}</code></pre>`;
+	return `<pre class="language-${language}"><code>${content}</code></pre>`;
 
 };
 
