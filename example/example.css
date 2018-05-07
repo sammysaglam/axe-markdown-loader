@@ -89,6 +89,7 @@
     letter-spacing: -0.2px;
     font-size: inherit;
     caret-color: white;
+    font-family: "Lucida Console", Monaco, monospace;
     color: #FFFFFF; }
     .axe-markdown__render-source::selection {
       color: white;
