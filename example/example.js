@@ -23177,7 +23177,8 @@ var JSXRenderResult = function (_React$Component3) {
 var PropsTable = function PropsTable(_ref7) {
 	var _ref7$component = _ref7.component,
 	    propTypes = _ref7$component.propTypes,
-	    defaultProps = _ref7$component.defaultProps;
+	    _ref7$component$defau = _ref7$component.defaultProps,
+	    defaultProps = _ref7$component$defau === undefined ? {} : _ref7$component$defau;
 	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 		'table',
 		{ className: 'axe-markdown-props-table' },
@@ -23291,7 +23292,7 @@ var readerFriendlyPropType = function readerFriendlyPropType(_ref9) {
 				),
 				')'
 			)]);
-		}),
+		}, []),
 		'}',
 		')'
 	) || info.propTypeName === 'any' && 'Any';
