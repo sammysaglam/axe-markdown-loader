@@ -1,4 +1,4 @@
-const PropsTable = ({ component: { propTypes, defaultProps } }) => (
+const PropsTable = ({ component: { propTypes, defaultProps = {} } }) => (
 	<table className="axe-markdown-props-table">
 		<thead>
 			<tr>
@@ -125,7 +125,7 @@ const readerFriendlyPropType = ({ info }) => (
 						{readerFriendlyPropType({ info })}
 					</div>
 				)</div>
-				])
+				], [])
 			}
 			{'}'}
 			)
