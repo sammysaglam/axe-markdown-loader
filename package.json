@@ -22,11 +22,11 @@
 		"front-matter": "^2.3.0",
 		"reduce-object": "^0.1.3",
 		"remarkable": "^1.7.1",
-		"stylis": "^3.5.0"
+		"stylis": "^3.5.1"
 	},
 	"devDependencies": {
 		"babel-core": "^6.26.0",
-		"babel-jest": "^22.1.0",
+		"babel-jest": "^23.2.0",
 		"babel-loader": "^7.1.2",
 		"babel-plugin-static-fs": "^1.1.0",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -34,13 +34,13 @@
 		"babel-preset-react": "^6.24.1",
 		"css-loader": "^0.28.10",
 		"extract-text-webpack-plugin": "^3.0.2",
-		"jest": "^22.1.4",
-		"jest-cli": "^22.1.4",
+		"jest": "^23.2.0",
+		"jest-cli": "^23.2.0",
 		"node-sass": "^4.9.0",
-		"react": "^16.2.0",
-		"react-dom": "^16.2.0",
-		"sass-loader": "^6.0.6",
-		"webpack": "^3.10.0"
+		"react": "^16.4.1",
+		"react-dom": "^16.4.1",
+		"sass-loader": "^7.0.3",
+		"webpack": "^4.14.0"
 	},
 	"jest": {
 		"moduleDirectories": [
