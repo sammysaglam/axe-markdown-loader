@@ -155,9 +155,13 @@
 		line-height    : 1.4;
 		position       : relative;
 		letter-spacing : -0.2px;
-		font-size      : inherit;
+		font-size      : 13px;
 		caret-color    : white;
 		font-family : "Lucida Console", Monaco, monospace;
+
+		code {
+			font-size: 13px;
+		}
 
 		&::selection {
 			color: white; 

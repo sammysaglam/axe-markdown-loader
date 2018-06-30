@@ -87,10 +87,12 @@
     line-height: 1.4;
     position: relative;
     letter-spacing: -0.2px;
-    font-size: inherit;
+    font-size: 13px;
     caret-color: white;
     font-family: "Lucida Console", Monaco, monospace;
     color: #FFFFFF; }
+    .axe-markdown__render-source code {
+      font-size: 13px; }
     .axe-markdown__render-source::selection {
       color: white;
       background: #d4ffdd; }
