@@ -4,28 +4,24 @@ exports[`markdown loader component builder correctly build component based on JS
 "import React from 'react';
 import ReactDOM from 'react-dom';
 import reduce from 'reduce-object';
-import { transform } from \\"babel-standalone/babel.min.js\\";
 import stylis from \\"stylis\\";
 
-import 'prismjs';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-php';
-import 'prismjs/components/prism-markdown';
+const buble = require( 'buble');
 
 const Remarkable = require('remarkable');
 const md = new Remarkable({ xhtmlOut: true });
 
-const AxeMarkdownModules = {
-	core: {
-		React,
-		ReactDOM
-	},
-	userImports: {},
-	props: {}
-};
-window.AxeMarkdownModules = AxeMarkdownModules;
+if ( !window.AxeMarkdownModules ) {
+	const AxeMarkdownModules = {
+		core: {
+			React,
+			ReactDOM
+		},
+		userImports: {},
+		props: {}
+	};
+	window.AxeMarkdownModules = AxeMarkdownModules;
+}
 
 const highlightFenceBlock = (tokens, idx) => {
 
@@ -34,11 +30,7 @@ const highlightFenceBlock = (tokens, idx) => {
 
 	const { content } = tokens[idx];
 
-	const prismLanguagesConverter = {
-		js: 'javascript'
-	};
-
-	return \`<pre class=\\"language-\${language}\\"><code>\${Prism.highlight(content, Prism.languages[language])}</code></pre>\`;
+	return \`<pre class=\\"language-\${language}\\"><code>\${content}</code></pre>\`;
 
 };
 
@@ -62,6 +54,7 @@ const importedComponents = {
 			window.AxeMarkdownModules = {
 				...window.AxeMarkdownModules ,
 				userImports: {
+					...window.AxeMarkdownModules.userImports,
 					...importedComponents
 				}
 			}
@@ -178,7 +171,7 @@ export default class MarkdownComponent extends React.Component {
 }
 
 const jsxTransform = ({id , parentMarkdownId , source}) => (
-    transform(\`
+    buble.transform(\`
         (() => {
 
             const { React , ReactDOM } = window.AxeMarkdownModules.core;
@@ -192,13 +185,11 @@ const jsxTransform = ({id , parentMarkdownId , source}) => (
             ReactDOM.render(Component, renderTarget);
 
         })();
-    \`, {
-        presets: ['es2015', 'react'],
-    }).code
+    \`).code
 );
 
 const javascriptTransform = ({parentMarkdownId , source}) => (
-    transform(\`
+    buble.transform(\`
         (() => {
 
             const { React , ReactDOM } = window.AxeMarkdownModules.core;
@@ -209,9 +200,7 @@ const javascriptTransform = ({parentMarkdownId , source}) => (
             \${source}
 
         })();
-    \`, {
-        presets: ['es2015', 'react'],
-    }).code
+    \`).code
 );
 
 const transpileSource = ({languageName , source, id = null , parentMarkdownId}) => (
@@ -247,10 +236,12 @@ class ExampleRenderer extends React.Component {
         this.state = {
             source: processedInitialSource,
             transpiledSource: transpileSource({ languageName , id: this.id , parentMarkdownId , source: processedInitialSource }),
+            sourceMutated: false
         }
         
         this.onChange = this.onChange.bind(this);
         this.evalJS = this.evalJS.bind(this);
+        this.restoreInitialSource = this.restoreInitialSource.bind(this);
     }
         
     componentDidMount() {
@@ -278,11 +269,8 @@ class ExampleRenderer extends React.Component {
         this.setState({
             source: newSource,
             transpiledSource,
+            sourceMutated: true
         });
-  
-        if ( (languageName === \\"jsx\\" || languageName === \\"javascript\\") && transpiledSource !== oldTranspiledSource ) {
-            this.evalJS({transpiledSource});
-        }
     }
 
     evalJS({transpiledSource} = {}) {
@@ -299,10 +287,57 @@ class ExampleRenderer extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        const {parentMarkdownId , languageName , initialSource} = this.props;
+        const {source , sourceMutated} = this.state;
+
+        if (prevProps.initialSource !== initialSource) {
+            this.onChange({newSource: initialSource});
+
+            setTimeout(() => {
+                this.setState({
+                    sourceMutated:false
+                })
+            });
+
+            return false;
+        }
+
+        if (source === initialSource && sourceMutated) {
+            setTimeout(() => {
+                this.setState({
+                    sourceMutated:false
+                })
+            });
+        }
+
+        if ( (languageName === \\"jsx\\" || languageName === \\"javascript\\") ) {
+            try {
+                const transpiledSource = transpileSource({languageName , id: this.id , parentMarkdownId , source});
+                this.evalJS({transpiledSource});
+
+            } catch (error) {
+                console.log('error:', error);
+            }
+        }
+    }
+
+    restoreInitialSource() {
+        const {initialSource} = this.props;
+
+        this.onChange({newSource: initialSource})
+
+        setTimeout(() => {
+            this.setState({
+                sourceMutated:false
+            })
+        });
+    }
+
     render() {
         const { languageName , showSource , hideLineNumbers , hideRender } = this.props;
-        const { source, transpiledSource } = this.state;
-        const { id , onChange } = this;
+        const { source, transpiledSource, sourceMutated } = this.state;
+        const { id , onChange , restoreInitialSource } = this;
 
         return (
             <div>
@@ -324,26 +359,30 @@ class ExampleRenderer extends React.Component {
 
                 {showSource && (
                     <div style={{position: 'relative'}}>
+                        {sourceMutated && <button className=\\"axe-markdown__restore-source\\" onClick={restoreInitialSource} style={{position:'absolute', right:3, top:4, zIndex:2}}>Restore Source</button>}
                         <pre
                             className={[
                                 \\"axe-markdown__render-source\\",
-                                hideLineNumbers ? null : 'axe-markdown__render-source--with-line-numbers'
+                                hideLineNumbers ? null : 'axe-markdown__render-source--with-line-numbers',
+                                hideLineNumbers ? null : 'axe-markdown__render-source--line-numbers-padding',
                             ].filter(className => className).join(' ')}
                         >
-                            <code
-                                style={{pointerEvents:'none' , background:'none'}}
-                                dangerouslySetInnerHTML={{ __html: Prism.highlight(source, Prism.languages[languageName]) }}
-                            />
+                            <code style={{pointerEvents:'none' , background:'none'}}>
+                                {source}
+                            </code>
                         </pre>
                         <textarea
-                            className=\\"axe-markdown__render-source\\"
+                            className={[
+                                \\"axe-markdown__render-source\\",
+                                hideLineNumbers ? null : 'axe-markdown__render-source--line-numbers-padding',
+                            ].filter(className => className).join(' ')}
                             onChange={({ target: { value } }) => onChange({ newSource: value })}
                             value={source}
                             disabled={hideRender}
                             style={{
                                 color:'transparent',
                                 position:'absolute',
-                                left:hideLineNumbers ? 0 : 33,
+                                left:0,
                                 top:0,
                                 zIndex:1,
                                 background:\\"none\\",
@@ -351,7 +390,8 @@ class ExampleRenderer extends React.Component {
                                 border:\\"none\\",
                                 width:\\"100%\\",
                                 height:\\"100%\\",
-                                resize: 'none'
+                                resize: 'none',
+                                overflow:'hidden'
                             }}
                             autoComplete=\\"off\\" autoCorrect=\\"off\\" autoCapitalize=\\"off\\" spellCheck=\\"false\\"
                             onKeyDown={event => {
@@ -392,7 +432,7 @@ class JSXRenderResult extends React.Component {
     }
 }
 
-const PropsTable = ({ component: { propTypes, defaultProps } }) => (
+const PropsTable = ({ component: { propTypes, defaultProps = {} } }) => (
 	<table className=\\"axe-markdown-props-table\\">
 		<thead>
 			<tr>
@@ -519,7 +559,7 @@ const readerFriendlyPropType = ({ info }) => (
 						{readerFriendlyPropType({ info })}
 					</div>
 				)</div>
-				])
+				], [])
 			}
 			{'}'}
 			)
