@@ -1,6 +1,6 @@
 {
 	"name": "axe-markdown-loader",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"description": "allows you to import md files as React components and easy creation of documentation",
 	"main": "index.production.js",
 	"author": "Sammy Saglam <sami@saglam.tk>",
